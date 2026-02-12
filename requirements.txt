@@ -2,8 +2,14 @@ streamlit
 langchain
 langchain-community
 langchain-core
-ctransformers
-sentence-transformers
-torch
-uvicorn
-python-box
+langchain-groq
+python-dotenv
+# streamlit
+# langchain
+# langchain-community
+# langchain-core
+# ctransformers
+# sentence-transformers
+# torch
+# uvicorn
+# python-box

@@ -1,16 +1,18 @@
 import streamlit as st
+from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
-from langchain_community.llms import CTransformers
+import os
+from dotenv import load_dotenv
 
-## Function To get response from LLAma 2 model
-
+load_dotenv()
 def getLLamaresponse(input_text,no_words,blog_style):
 
     ### LLama2 model
-    llm=CTransformers(model='models/llama-2-7b-chat.ggmlv3.q4_K_M.bin',
-                      model_type='llama',
-                      config={'max_new_tokens':512,
-                              'temperature':0.01})
+    llm = ChatGroq(
+        groq_api_key=os.getenv("GROQ_API_KEY"),
+        model_name="llama-3.1-8b-instant"
+    )
+
     
     ## Prompt Template
     template = """
@@ -24,6 +26,7 @@ def getLLamaresponse(input_text,no_words,blog_style):
     
     ## Generate the ressponse from the LLama 2 model
     response = llm.invoke(prompt.format(blog_style=blog_style,input_text=input_text,no_words=no_words))
+    response = response.content
     print(response)
     return response
 
